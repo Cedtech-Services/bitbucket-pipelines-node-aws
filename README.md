@@ -16,7 +16,7 @@ image: cedtech/bitbucket-pipelines-node-aws:latest
 
 👤 **CedTech Services**
 
-- Website: https://sov.tech
+- Website: https://cedtech.co.za
 - Github: [@cedtech-services](https://github.com/cedtech-services)
 
 ## Show your support
