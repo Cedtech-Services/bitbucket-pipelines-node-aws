@@ -2,22 +2,22 @@
 
 > A container image for bitbucket pipeline builds on a node stack, with aws cli for deployments to aws.
 
-### 🏠 [Homepage](https://hub.docker.com/r/sovtech/bitbucket-pipelines-node-aws)
+### 🏠 [Homepage](https://hub.docker.com/r/cedtech/bitbucket-pipelines-node-aws)
 
 ## Usage
 
 Specify this image in your bitbucket-pipelines.yml
 
 ```
-image: sovtech/bitbucket-pipelines-node-aws:latest
+image: cedtech/bitbucket-pipelines-node-aws:latest
 ```
 
 ## Author
 
-👤 **SovTech**
+👤 **CedTech Services**
 
 - Website: https://sov.tech
-- Github: [@sovtech](https://github.com/sovtech)
+- Github: [@cedtech-services](https://github.com/cedtech-services)
 
 ## Show your support
 
