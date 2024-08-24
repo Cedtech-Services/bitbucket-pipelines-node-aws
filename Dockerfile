@@ -21,5 +21,6 @@ RUN apk --purge -v del py-pip
 RUN rm /var/cache/apk/*
 
 RUN yarn global add typescript
+RUN yarn global add pnpm
 
 CMD ["/bin/bash"]
