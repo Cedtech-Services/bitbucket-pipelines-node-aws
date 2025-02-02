@@ -10,28 +10,25 @@ RUN apk update && \
     openssh \
     git \
     jq \
+    aws-cli \
     python3 \
     py3-pip \
     groff \
-    less \
-    gcc \
-    python3-dev \
-    libffi-dev \
-    musl-dev \
-    openssl-dev
+    less
 
 # Set timezone to UTC by default
 RUN ln -sf /usr/share/zoneinfo/Etc/UTC /etc/localtime
 
-# Install AWS CLI v2
-RUN curl "https://awscli.amazonaws.com/awscli-exe-linux-x86_64-2.0.30.zip" -o "awscliv2.zip" && \
-    unzip awscliv2.zip && \
-    ./aws/install && \
-    rm -rf aws awscliv2.zip
-
-# Install EB CLI using pip
-RUN pip3 install --upgrade pip && \
-    pip3 install --no-cache-dir ebcli
+# Install EB CLI
+RUN apk add --no-cache \
+    python3-dev \
+    libffi-dev \
+    musl-dev \
+    openssl-dev \
+    gcc && \
+    pip3 install --upgrade pip && \
+    pip3 install --no-cache-dir ebcli && \
+    apk del python3-dev libffi-dev musl-dev openssl-dev gcc
 
 # Install global Node.js packages
 RUN yarn global add typescript pnpm
