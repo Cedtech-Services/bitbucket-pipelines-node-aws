@@ -1,0 +1,49 @@
+name: Build and Push to DockerHub
+
+on:
+  push:
+    branches: [ "master" ]
+  pull_request:
+    branches: [ "master" ]
+  # Allow manual triggers
+  workflow_dispatch:
+
+env:
+  # Change these values to match your DockerHub repository
+  DOCKER_HUB_REPOSITORY: cedtech/bitbucket-pipelines-node-aws
+  
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+      
+      - name: Set up Docker Buildx
+        uses: docker/setup-buildx-action@v3
+      
+      - name: Get current date
+        id: date
+        run: echo "date=$(date +'%Y%m%d')" >> $GITHUB_OUTPUT
+      
+      - name: Login to DockerHub
+        uses: docker/login-action@v3
+        with:
+          username: ${{ secrets.DOCKER_HUB_USERNAME }}
+          password: ${{ secrets.DOCKER_HUB_TOKEN }}
+      
+      - name: Build and push
+        uses: docker/build-push-action@v5
+        with:
+          context: .
+          push: true
+          tags: |
+            ${{ env.DOCKER_HUB_REPOSITORY }}:latest
+            ${{ env.DOCKER_HUB_REPOSITORY }}:${{ github.sha }}
+            ${{ env.DOCKER_HUB_REPOSITORY }}:${{ steps.date.outputs.date }}
+          cache-from: type=registry,ref=${{ env.DOCKER_HUB_REPOSITORY }}:buildcache
+          cache-to: type=registry,ref=${{ env.DOCKER_HUB_REPOSITORY }}:buildcache,mode=max
+      
+      - name: Image digest
+        run: echo ${{ steps.docker_build.outputs.digest }}
