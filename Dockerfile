@@ -23,11 +23,20 @@ RUN apk update && \
 # Set timezone to UTC by default
 RUN ln -sf /usr/share/zoneinfo/Etc/UTC /etc/localtime
 
-# Install AWS CLI and EB CLI
-RUN pip3 install --no-cache-dir awscli awsebcli && \
-    rm -rf /var/cache/apk/*
+# Install AWS CLI v2
+RUN curl "https://awscli.amazonaws.com/awscli-exe-linux-x86_64-2.0.30.zip" -o "awscliv2.zip" && \
+    unzip awscliv2.zip && \
+    ./aws/install && \
+    rm -rf aws awscliv2.zip
+
+# Install EB CLI using pip
+RUN pip3 install --upgrade pip && \
+    pip3 install --no-cache-dir ebcli
 
 # Install global Node.js packages
 RUN yarn global add typescript pnpm
+
+# Clean up
+RUN rm -rf /var/cache/apk/*
 
 CMD ["/bin/bash"]
