@@ -19,17 +19,6 @@ RUN apk update && \
 # Set timezone to UTC by default
 RUN ln -sf /usr/share/zoneinfo/Etc/UTC /etc/localtime
 
-# Install EB CLI
-RUN apk add --no-cache \
-    python3-dev \
-    libffi-dev \
-    musl-dev \
-    openssl-dev \
-    gcc && \
-    pip3 install --upgrade pip && \
-    pip3 install --no-cache-dir ebcli && \
-    apk del python3-dev libffi-dev musl-dev openssl-dev gcc
-
 # Install global Node.js packages
 RUN yarn global add typescript pnpm
 
