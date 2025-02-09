@@ -20,7 +20,7 @@ RUN apk update && \
 RUN ln -sf /usr/share/zoneinfo/Etc/UTC /etc/localtime
 
 # Install global Node.js packages
-RUN yarn global add typescript pnpm
+RUN npm install -g typescript pnpm
 
 # Clean up
 RUN rm -rf /var/cache/apk/*
