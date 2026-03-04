@@ -16,6 +16,8 @@ RUN apk update && \
     groff \
     less
 
+RUN curl -fsSL https://bun.sh/install | bash
+
 # Set timezone to UTC by default
 RUN ln -sf /usr/share/zoneinfo/Etc/UTC /etc/localtime
 
