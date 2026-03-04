@@ -1,5 +1,5 @@
 # Version 1.0.1
-FROM node:20-alpine
+FROM node:22-alpine
 
 # Install base and dev packages
 RUN apk update && \
