@@ -1,30 +1,15 @@
-# Version 1.0.1
-FROM node:22-alpine
+FROM oven/bun:1.3.5
 
-# Install base and dev packages
 RUN apk update && \
     apk add --no-cache \
     bash \
     make \
     curl \
-    openssh \
+    openssh-client \
     git \
     jq \
     aws-cli \
-    python3 \
-    py3-pip \
     groff \
-    less
-
-RUN curl -fsSL https://bun.sh/install | bash
-
-# Set timezone to UTC by default
-RUN ln -sf /usr/share/zoneinfo/Etc/UTC /etc/localtime
-
-# Install global Node.js packages
-RUN npm install -g typescript pnpm
-
-# Clean up
-RUN rm -rf /var/cache/apk/*
+    less  
 
 CMD ["/bin/bash"]
