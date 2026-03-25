@@ -1,4 +1,4 @@
-FROM oven/bun:1.3.5
+FROM oven/bun:1.3.5-alpine
 
 RUN apk update && \
     apk add --no-cache \
